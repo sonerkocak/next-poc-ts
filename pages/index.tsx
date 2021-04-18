@@ -3,7 +3,10 @@ import axios, {AxiosResponse} from "axios";
 import {instanceOf} from "prop-types";
 
 type Post = {
-    id: number
+    id: number,
+    userId: number,
+    title: string,
+    body: string,
 }
 
 export default function Home() {
@@ -14,8 +17,9 @@ export default function Home() {
     }, []);
 
     async function getRecords() {
-        const res:  AxiosResponse<Post[]> = await axios.get('https://jsonplaceholder.typicode.com/posts');
+        const res:  AxiosResponse<Post[]> = await axios.get<Post[]>('https://jsonplaceholder.typicode.com/posts');
 
+        console.log(typeof res.data);
         console.log(typeof res.data[0]);
         console.log(res.data[0]);
     }
